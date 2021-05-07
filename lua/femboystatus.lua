@@ -8,7 +8,7 @@ local fn = vim.fn
 local function set_statusline()
 
 	nr_of_windows = fn.winnr('$')
-	for winnr in 1, nr_of_windows do -- for each window
+	for winnr = 1, nr_of_windows do -- for each window
 		-- get the id of window i
 		winid = fn.win_getid(winnr)
 		-- TODO: check for special windows
