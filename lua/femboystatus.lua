@@ -67,7 +67,7 @@ local function setup( I )
 	StatusLine =
 
 [[%{luaeval("require('stlfunctions').Icon()")}]].. 
-[[ ]]
+[[ ]]..
 [[%{luaeval("require('stlfunctions').File()")}]].. 
 
 [[%=]]..
