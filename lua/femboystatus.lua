@@ -25,7 +25,7 @@ local function set_every_statusline()
 end
 
 local function set_inactive_statusline()
-	vim.wo.statusline = StatusLineInactive
+	vim.wo.statusline = StatusLineNC
 end
 
 
