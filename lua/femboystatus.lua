@@ -16,7 +16,7 @@ local function generate_StatusLine()
 	StatusLine =
 '%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
 [[ ]]..
-[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#NonText#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
 
 [[%=]]..
 
@@ -25,6 +25,20 @@ local function generate_StatusLine()
 [[%=]]..
 
 [[fem@boy]]
+end
+
+local function generate_StatusLineNC()
+	StatusLineNC = 
+'%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+[[ ]]..
+[[%#NonText#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+
+[[%=]]..
+
+
+[[%=]]..
+
+[[<]]
 end
 
 
@@ -81,30 +95,8 @@ end
 local function setup( I )
 
 -- Status line used for CURRENT window
-	StatusLine =
-
-[[%{luaeval("require('stlfunctions').Icon()")}]].. 
-[[ ]]..
-[[%{luaeval("require('stlfunctions').File()")}]].. 
-
-[[%=]]..
-
-[[%#StatusLineMode#]] .. [[%{luaeval("require('stlfunctions').Mode()")}]]..
-
-[[%=]]..
-
-[[fem@boy]]
-
--- Status line used for NOT CURRENT window
-	StatusLineNC = 
-[[%{luaeval("require('stlfunctions').File()")}]].. 
-
-[[%=]]..
-
-
-[[%=]]..
-
-[[<]]
+	generate_StatusLine()
+	generate_StatusLineNC()
 	StatusLine2 =
 [[%{luaeval("require('stlfunctions').File()")}]].. 
 
@@ -113,7 +105,7 @@ local function setup( I )
 
 [[%=]]..
 
-[[<<<]]
+[[<<<<]]
 
 	StatusLine_augroup()
 
