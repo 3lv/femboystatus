@@ -14,15 +14,28 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 local function set_every_statusline()
 
 	nr_of_windows = fn.winnr('$')
+	current_winid = fn.win_getid()
+	-- Setting statusline for non-current windows
+	-- (all windows but the curernt one)
 	for winnr = 1, nr_of_windows do -- for each window
 		-- get the id of window i
 		winid = fn.win_getid(winnr)
-		-- TODO: check for special windows
-		vim.wo[winid].statusline = StatusLineNC
+		if winid ~= current_winid then -- don't set for current window
+			-- TODO: check for special windows
+			vim.wo[winid].statusline = StatusLineNC
+		end
 	end
 
-	-- replace for current window
-	vim.wo.statusline = StatusLine
+	-- set for current window
+	current_bufnr = winbufnr(current_winid)
+	-- Check for special filetypes
+	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
+		-- Use the status line for special filetypes
+		vim.wo[current_winid].statusline = StatusLine2
+	else
+		-- Use the default status line for the current window
+		vim.wo[current_winid].statusline = StatusLine
+	end
 end
 
 -- function used when the current window will no longer be active
@@ -68,6 +81,15 @@ local function setup( I )
 [[%=]]..
 
 [[<]]
+	StatusLine2 =
+[[%{luaeval("require('stlfunctions').File()")}]].. 
+
+[[%=]]..
+
+
+[[%=]]..
+
+[[<<<]]
 
 	StatusLine_augroup()
 
