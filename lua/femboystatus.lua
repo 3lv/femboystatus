@@ -1,5 +1,7 @@
 M = { }
 
+StatusLine_special_filetype = { NvimTree = 'NvimTree פּ', packer = 'Packer ' }
+
 local fn = vim.fn
 
 local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWritePost',
@@ -8,7 +10,6 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 -- set's status line for current window and a 
 -- different status line for other windows
 -- (using vim.wo.statusline instead of .o.)
-
 
 local function set_every_statusline()
 
@@ -24,8 +25,21 @@ local function set_every_statusline()
 	vim.wo.statusline = StatusLine
 end
 
+-- function used when the current window will no longer be active
+-- {event} = WinLeave
 local function set_inactive_statusline()
 	vim.wo.statusline = StatusLineNC
+end
+
+local function StatusLine_augroup()
+	vim.api.nvim_command('augroup StatusLine')
+	vim.api.nvim_command('autocmd!')
+	for _,event in ipairs(events) do
+		local command = string.format('autocmd %s * lua require("femboystatus").every()', event)
+		vim.api.nvim_command(command)
+	end
+	vim.api.nvim_command('autocmd WinLeave * lua require("femboystatus").inactive()')
+	vim.api.nvim_command('augroup END')
 end
 
 
@@ -55,14 +69,8 @@ local function setup( I )
 
 [[<]]
 
-	vim.api.nvim_command('augroup StatusLine')
-	vim.api.nvim_command('autocmd!')
-	for _,event in ipairs(events) do
-		local command = string.format('autocmd %s * lua require("femboystatus").every()', event)
-		vim.api.nvim_command(command)
-	end
-	vim.api.nvim_command('autocmd WinLeave * lua require("femboystatus").inactive()')
-	vim.api.nvim_command('augroup END')
+	StatusLine_augroup()
+
 end
 
 M.setup = setup

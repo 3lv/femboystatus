@@ -1,6 +1,5 @@
 local M = { }
 
-local special_name = { NvimTree = 'NvimTree פּ', packer = 'Packer ' }
 
 local colors = {
 	bg = 'none',
@@ -23,7 +22,7 @@ local function get_current_file_name()
 	local file = vim.fn.expand('%:t')
 	if vim.fn.empty(file) == 1 then return  '[No Name][buffer ' .. vim.fn.bufnr('%') .. ']'end
 	if string.sub(file, 1, 4) == 'tmp.' then return '[Temp file]' end
-	if special_name[vim.bo.filetype] ~= nil then return special_name[vim.bo.filetype] end
+	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then return StatusLine_special_filetype[vim.bo.filetype] end
 	if vim.bo.filetype == 'help' then return file .. ' ' end
 	if vim.bo.modifiable and vim.bo.modified and vim.bo.readonly then
 		file = file .. ' ' .. ''
