@@ -18,6 +18,23 @@ local colors = {
 }
 
 
+local function get_current_file_icon()
+	local icon = ''
+	--if vim.fn.exists("*WebDevIconsGetFileTypeSymbol") == 1 then
+	--	icon = vim.fn.WebDevIconsGetFileTypeSymbol()
+	--	return icon
+	--end
+	local ok,devicons = pcall(require,'nvim-web-devicons')
+	if not ok then print([[Install 'kyazdani42/nvim-web-devicons' to use icons]]) return '' end
+	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
+	icon = devicons.get_icon(f_name,f_extension)
+	if icon == nil then
+		icon = ''
+	end
+	return icon .. ' '
+end
+
+
 local function get_current_file_name()
 	local file = vim.fn.expand('%:t')
 	if vim.fn.empty(file) == 1 then return  '[No Name][buffer ' .. vim.fn.bufnr('%') .. ']'end
@@ -74,10 +91,11 @@ local function Mode()
 	  vim.api.nvim_command('hi StatusLineMode guifg='..mode_color[vim_mode]..' gui=bold')
 	  --return alias[vim_mode] .. '   '
 	  return alias[vim_mode]
-	end
+end
 
 
 M.File = get_current_file_name
 M.Mode = Mode
+M.Icon = get_file_icon
 
 return M
