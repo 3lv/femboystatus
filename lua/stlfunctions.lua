@@ -21,6 +21,6 @@ local function get_current_file_name()
 end
 
 
-M['file_name']= get_current_file_name
+M['file_name'] = get_current_file_name
 
 return M
