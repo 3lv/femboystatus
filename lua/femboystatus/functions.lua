@@ -1,5 +1,6 @@
 local M = { }
 
+local special_name = { NvimTree = 'NvimTree פּ', packer = 'Packer ' }
 
 local function get_current_file_name()
 	local file = vim.fn.expand('%:t')
