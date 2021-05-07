@@ -15,7 +15,12 @@ local function set_every_statusline()
 
 	nr_of_windows = fn.winnr('$')
 	current_winid = fn.win_getid()
-	print (current_winid)
+	-- find buffer for current window
+	current_bufnr = fn.winbufnr(current_winid)
+	print (nr_of_windows)
+	if current_bufnr == -1 then
+		return
+	end
 	-- Setting statusline for non-current windows
 	-- (all windows but the curernt one)
 	for winnr = 1, nr_of_windows do -- for each window
@@ -27,8 +32,6 @@ local function set_every_statusline()
 		end
 	end
 
-	-- set for current window
-	current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
 		-- Use the status line for special filetypes
