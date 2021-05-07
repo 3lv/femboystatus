@@ -19,7 +19,7 @@ local colors = {
 
 
 local function get_current_file_icon()
-	local icon = ''
+	local icon=''
 	--if vim.fn.exists("*WebDevIconsGetFileTypeSymbol") == 1 then
 	--	icon = vim.fn.WebDevIconsGetFileTypeSymbol()
 	--	return icon
@@ -31,7 +31,15 @@ local function get_current_file_icon()
 	if icon == nil then
 		icon = ''
 	end
-	return icon .. ' '
+	return icon
+end
+
+local function get_current_file_icon_hl()
+	local icon
+	local ok,devicons = pcall(require,'nvim-web-devicons')
+	local icon, icon_hl = devicons.get_icon(f_name,f_extension)
+	if icon_hl == nil then return 'Normal' end
+	return icon_hl
 end
 
 
@@ -97,5 +105,6 @@ end
 M.File = get_current_file_name
 M.Mode = Mode
 M.Icon = get_current_file_icon
+M.Icon_hl = get_current_file_icon_hl
 
 return M

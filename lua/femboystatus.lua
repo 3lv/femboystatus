@@ -12,6 +12,22 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 -- (using vim.wo.statusline instead of .o.)
 
 
+local function generate_StatusLine()
+	StatusLine =
+'%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+[[ ]]..
+[[%{luaeval("require('stlfunctions').File()")}]].. 
+
+[[%=]]..
+
+[[%#StatusLineMode#]] .. [[%{luaeval("require('stlfunctions').Mode()")}]]..
+
+[[%=]]..
+
+[[fem@boy]]
+end
+
+
 
 local function set_every_statusline()
 
@@ -37,6 +53,7 @@ local function set_every_statusline()
 		vim.wo[current_winid].statusline = StatusLine2
 	else
 		-- Use the default status line for the current window
+		generate_StatusLine()
 		vim.wo[current_winid].statusline = StatusLine
 	end
 end
