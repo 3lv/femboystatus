@@ -36,6 +36,7 @@ end
 
 local function get_current_file_icon_hl()
 	local icon
+	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
 	local ok,devicons = pcall(require,'nvim-web-devicons')
 	local icon, icon_hl = devicons.get_icon(f_name,f_extension)
 	if icon_hl == nil then return 'Normal' end
