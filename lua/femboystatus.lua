@@ -1,9 +1,10 @@
 M = { }
 
-local function Set_statusline()
-	vim.o.statusline = [[%{luaeval("require('stlfunctions')['file_name']()")}]]
+local function setup()
+	vim.o.statusline = 
+[[%{luaeval("require('stlfunctions').File()")} %= %{luaeval("require('stlfunctions').Mode()")}]]
 end
 
-M.Set_statusline = Set_statusline
+M.setup = setup
 
 return M
