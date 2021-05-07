@@ -96,6 +96,6 @@ end
 
 M.File = get_current_file_name
 M.Mode = Mode
-M.Icon = get_file_icon
+M.Icon = get_current_file_icon
 
 return M
