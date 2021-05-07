@@ -56,6 +56,7 @@ local function set_every_statusline()
 		winid = fn.win_getid(winnr)
 		if winid ~= current_winid then -- don't set for current window
 			-- TODO: check for special windows
+			generate_StatusLineNC()
 			vim.wo[winid].statusline = StatusLineNC
 		end
 	end
