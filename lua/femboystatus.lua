@@ -27,7 +27,7 @@ local function set_every_statusline()
 	end
 
 	-- set for current window
-	current_bufnr = winbufnr(current_winid)
+	current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
 		-- Use the status line for special filetypes
