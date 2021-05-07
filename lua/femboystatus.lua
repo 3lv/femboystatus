@@ -66,6 +66,8 @@ local function setup( I )
 -- Status line used for CURRENT window
 	StatusLine =
 
+[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+[[ ]]
 [[%{luaeval("require('stlfunctions').File()")}]].. 
 
 [[%=]]..
