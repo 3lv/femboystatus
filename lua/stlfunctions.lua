@@ -72,7 +72,7 @@ local function Mode()
 		  Rv = colors.magenta,
 	  }
 	  local vim_mode = vim.fn.mode()
-	  vim.api.nvim_command('hi StatusLineMode guifg='..mode_color[vim_mode])
+	  vim.api.nvim_command('hi StatusLineMode guifg='..mode_color[vim_mode]..' gui=bold')
 	  --return alias[vim_mode] .. '   '
 	  return alias[vim_mode]
 	end
