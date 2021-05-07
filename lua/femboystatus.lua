@@ -12,7 +12,7 @@ local function set_statusline()
 		-- get the id of window i
 		winid = fn.win_getid(i)
 		-- TODO: check for special windows
-		vim.wo[winid]a.statusline = StatusLineNC
+		vim.wo[winid].statusline = StatusLineNC
 	end
 
 	-- now for current window
