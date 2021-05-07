@@ -27,9 +27,9 @@ local function generate_StatusLine()
 [[fem@boy]]
 end
 
-local function generate_StatusLineNC()
+local function generate_StatusLineNC( winid )
 	StatusLineNC = 
-'%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+'%#'..require('stlfunctions').NC_Icon_hl( winid )..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
 [[ ]]..
 [[%#NonText#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
 
@@ -56,7 +56,7 @@ local function set_every_statusline()
 		winid = fn.win_getid(winnr)
 		if winid ~= current_winid then -- don't set for current window
 			-- TODO: check for special windows
-			generate_StatusLineNC()
+			generate_StatusLineNC( winid )
 			vim.wo[winid].statusline = StatusLineNC
 		end
 	end

@@ -16,8 +16,19 @@ local colors = {
 	blue = '#51afef';
 	red = '#ec5f67'
 }
+local function get_file_icon_hl( winid )
+	local bufid = vim.fn.winbufnr(winid)
+	local bufcode = '#'..bufid
+	local f_name = vim.fn.expand(bufcode..':t')
+	local f_extension = vim.fn.expand(bufcode..':e')
+	local ok,devicons = pcall(require,'nvim-web-devicons')
+	local icon, icon_hl = devicons.get_icon(f_name,f_extension)
+	if icon_hl == nil then return 'Normal' end
+	return icon_hl
 
+end
 
+-- used only for current window
 local function get_current_file_icon()
 	local icon=''
 	--if vim.fn.exists("*WebDevIconsGetFileTypeSymbol") == 1 then
@@ -34,6 +45,7 @@ local function get_current_file_icon()
 	return icon
 end
 
+-- used only for current window
 local function get_current_file_icon_hl()
 	local icon
 	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
@@ -107,5 +119,6 @@ M.File = get_current_file_name
 M.Mode = Mode
 M.Icon = get_current_file_icon
 M.Icon_hl = get_current_file_icon_hl
+M.NC_Icon_hl = get_file_icon_hl
 
 return M
