@@ -57,7 +57,7 @@ local function setup( I )
 
 	vim.api.nvim_command('augroup StatusLine')
 	vim.api.nvim_command('autocmd!')
-	for _,event in ipair(events) do
+	for _,event in ipairs(events) do
 		local command = string.fromat('autocmd %s * lua require("femboystatus").every()', event)
 		vim.api.nvim_command(command)
 	end
