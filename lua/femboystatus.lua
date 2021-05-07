@@ -11,16 +11,14 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 -- different status line for other windows
 -- (using vim.wo.statusline instead of .o.)
 
+
+
 local function set_every_statusline()
 
 	nr_of_windows = fn.winnr('$')
 	current_winid = fn.win_getid()
 	-- find buffer for current window
-	current_bufnr = fn.winbufnr(current_winid)
-	print (nr_of_windows)
-	if current_bufnr == -1 then
-		return
-	end
+
 	-- Setting statusline for non-current windows
 	-- (all windows but the curernt one)
 	for winnr = 1, nr_of_windows do -- for each window
@@ -32,15 +30,18 @@ local function set_every_statusline()
 		end
 	end
 
+	current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
-		-- Use the status line for special filetypes
+		-- Use the status line for special filetypes(a simple statusline)
 		vim.wo[current_winid].statusline = StatusLine2
 	else
 		-- Use the default status line for the current window
 		vim.wo[current_winid].statusline = StatusLine
 	end
 end
+
+local async_combin = vim.loop.new_async(vim.schedule_wrap(set_every_statusline))
 
 -- function used when the current window will no longer be active
 -- {event} = WinLeave
