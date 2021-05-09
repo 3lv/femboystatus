@@ -69,20 +69,19 @@ local function set_every_statusline()
 
 	nr_of_windows = fn.winnr('$')
 	current_winid = fn.win_getid()
-	print (current_winid)
 	-- find buffer for current window
 
 	-- Setting statusline for non-current windows
 	-- (all windows but the curernt one)
-	for winnr = 1, nr_of_windows do -- for each window
-		-- get the id of window i
-		winid = fn.win_getid(winnr)
-		if winid ~= current_winid then -- don't set for current window
-			-- TODO: check for special windows
-			generate_StatusLineNC( winid )
-			vim.wo[winid].statusline = StatusLineNC
-		end
-	end
+	--for winnr = 1, nr_of_windows do -- for each window
+	--	-- get the id of window i
+	--	winid = fn.win_getid(winnr)
+	--	if winid ~= current_winid then -- don't set for current window
+	--		-- TODO: check for special windows
+	--		generate_StatusLineNC( winid )
+	--		vim.wo[winid].statusline = StatusLineNC
+	--	end
+	--end
 
 	current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
