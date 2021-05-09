@@ -20,7 +20,7 @@ local function generate_StatusLine()
 
 [[%=]]..
 
-[[%#StatusLineMode#]] .. [[%{luaeval("require('stlfunctions').Mode()")}]]..
+[[%#StatusLineFileActive#]] .. [[%{luaeval("require('stlfunctions').Mode()")}]]..
 
 [[%=]]..
 
@@ -37,7 +37,7 @@ local function generate_StatusLine2()
 	StatusLine2 =
 '%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
 [[ ]]..
-[[%#MoreMsg#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#StatusLineFileActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
 
 [[%=]]..
 
@@ -53,7 +53,7 @@ local function generate_StatusLineNC( winid )
 	StatusLineNC = 
 '%#'..require('stlfunctions').NC_Icon_hl( winid )..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
 [[ ]]..
-[[%#MoreMsg#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#StatusLineFileNonActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
 
 [[%=]]..
 
