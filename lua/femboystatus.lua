@@ -69,7 +69,7 @@ local function set_every_statusline()
 
 	nr_of_windows = fn.winnr('$')
 	current_winid = fn.win_getid()
-	pritn (current_winid)
+	print (current_winid)
 	-- find buffer for current window
 
 	-- Setting statusline for non-current windows
