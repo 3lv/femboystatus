@@ -16,11 +16,11 @@ local function generate_StatusLine()
 	StatusLine =
 '%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
 [[ ]]..
-[[%#MoreMsg#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#StatusLineFileActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
 
 [[%=]]..
 
-[[%#StatusLineFileActive#]] .. [[%{luaeval("require('stlfunctions').Mode()")}]]..
+[[%{luaeval("require('stlfunctions').Mode()")}]]..
 
 [[%=]]..
 
