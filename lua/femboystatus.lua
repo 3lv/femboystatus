@@ -1,6 +1,5 @@
 M = { }
 
-StatusLine_special_filetype = { NvimTree = 'NvimTree פּ', packer = 'Packer ' }
 
 local fn = vim.fn
 
@@ -136,6 +135,7 @@ end
 
 
 local function setup( I )
+	StatusLine_special_filetype = { NvimTree = 'NvimTree פּ', packer = 'Packer ' }
 
 	StatusLine_augroup()
 

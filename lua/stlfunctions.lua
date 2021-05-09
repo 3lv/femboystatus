@@ -30,7 +30,10 @@ end
 
 -- used only for current window
 local function get_current_file_icon()
-	local icon=''
+	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then
+		return ''
+	end
+
 	--if vim.fn.exists("*WebDevIconsGetFileTypeSymbol") == 1 then
 	--	icon = vim.fn.WebDevIconsGetFileTypeSymbol()
 	--	return icon
@@ -38,7 +41,7 @@ local function get_current_file_icon()
 	local ok,devicons = pcall(require,'nvim-web-devicons')
 	if not ok then print([[Install 'kyazdani42/nvim-web-devicons' to use icons]]) return '' end
 	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
-	icon = devicons.get_icon(f_name,f_extension)
+	local icon = devicons.get_icon(f_name,f_extension)
 	if icon == nil then
 		icon = ''
 	end
@@ -47,7 +50,9 @@ end
 
 -- used only for current window
 local function get_current_file_icon_hl()
-	local icon
+	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then
+		return 'Normal'
+	end
 	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
 	local ok,devicons = pcall(require,'nvim-web-devicons')
 	local icon, icon_hl = devicons.get_icon(f_name,f_extension)
