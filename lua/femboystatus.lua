@@ -101,6 +101,7 @@ local async_combin = vim.loop.new_async(vim.schedule_wrap(set_every_statusline))
 -- function used when the current window will no longer be active
 -- {event} = WinLeave
 local function set_inactive_statusline()
+	generate_StatusLineNC()
 	vim.wo.statusline = StatusLineNC
 end
 
@@ -117,11 +118,6 @@ end
 
 
 local function setup( I )
-
--- Status line used for CURRENT window
-	generate_StatusLine()
-	generate_StatusLine2()
-	generate_StatusLineNC()
 
 	StatusLine_augroup()
 
