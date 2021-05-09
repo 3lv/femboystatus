@@ -73,15 +73,15 @@ local function set_every_statusline()
 
 	-- Setting statusline for non-current windows
 	-- (all windows but the curernt one)
-	--for winnr = 1, nr_of_windows do -- for each window
-	--	-- get the id of window i
-	--	winid = fn.win_getid(winnr)
-	--	if winid ~= current_winid then -- don't set for current window
-	--		-- TODO: check for special windows
-	--		generate_StatusLineNC( winid )
-	--		vim.wo[winid].statusline = StatusLineNC
-	--	end
-	--end
+	for winnr = 1, nr_of_windows do -- for each window
+		-- get the id of window i
+		winid = fn.win_getid(winnr)
+		if winid ~= current_winid then -- don't set for current window
+			-- TODO: check for special windows
+			generate_StatusLineNC( winid )
+			vim.wo[winid].statusline = StatusLineNC
+		end
+	end
 
 	current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
@@ -96,10 +96,28 @@ local function set_every_statusline()
 	end
 end
 
-local async_combin = vim.loop.new_async(vim.schedule_wrap(set_every_statusline))
+--local async_combin = vim.loop.new_async(vim.schedule_wrap(set_every_statusline))
 
 -- function used when the current window will no longer be active
 -- {event} = WinLeave
+
+local function set_active_startusline()
+	-- get current win/buf informations
+	nr_of_windows = fn.winnr('$')
+	current_winid = fn.win_getid()
+	current_bufnr = fn.winbufnr(current_winid)
+	-- Check for special filetypes
+	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
+		-- Use the status line for special filetypes(a simpler statusline)
+		generate_StatusLine2()
+		vim.wo[current_winid].statusline = StatusLine2
+	else
+		-- Use the default status line for the current window
+		generate_StatusLine()
+		vim.wo[current_winid].statusline = StatusLine
+	end
+end
+
 local function set_inactive_statusline()
 	generate_StatusLineNC()
 	vim.wo.statusline = StatusLineNC
@@ -109,7 +127,7 @@ local function StatusLine_augroup()
 	vim.api.nvim_command('augroup StatusLine')
 	vim.api.nvim_command('autocmd!')
 	for _,event in ipairs(events) do
-		local command = string.format('autocmd %s * lua require("femboystatus").every()', event)
+		local command = string.format('autocmd %s * lua require("femboystatus").active()', event)
 		vim.api.nvim_command(command)
 	end
 	vim.api.nvim_command('autocmd WinLeave * lua require("femboystatus").inactive()')
@@ -124,6 +142,7 @@ local function setup( I )
 end
 
 M.setup = setup
+M.active = set_active_startusline
 M.inactive = set_inactive_statusline
 M.every = set_every_statusline
 
