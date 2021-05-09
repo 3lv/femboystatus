@@ -20,7 +20,7 @@ local function generate_StatusLine()
 
 [[%=]]..
 
-[[%{luaeval("require('stlfunctions').Mode()")}]]..
+[[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..
 
 [[%=]]..
 
