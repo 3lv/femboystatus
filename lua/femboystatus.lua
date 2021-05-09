@@ -47,6 +47,8 @@ local function generate_StatusLine2()
 
 end
 
+-- generates a statusline for a non current window
+-- (Specifically for window with 'winid')
 local function generate_StatusLineNC( winid )
 	StatusLineNC = 
 '%#'..require('stlfunctions').NC_Icon_hl( winid )..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
@@ -85,6 +87,7 @@ local function set_every_statusline()
 	-- Check for special filetypes
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
 		-- Use the status line for special filetypes(a simple statusline)
+		generate_StatusLine2()
 		vim.wo[current_winid].statusline = StatusLine2
 	else
 		-- Use the default status line for the current window
