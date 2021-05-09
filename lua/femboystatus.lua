@@ -24,7 +24,27 @@ local function generate_StatusLine()
 
 [[%=]]..
 
-[[fem@boy]]
+[[%#Normal#]] .. [[fem@boy]]
+end
+
+-- Generates a statusline used for current
+-- window if window
+-- has a buffer with special filetype
+-- (usually less important)
+
+local function generate_StatusLine2()
+
+	StatusLine2 =
+'%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+[[ ]]..
+[[%#NonText#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+
+[[%=]]..
+
+[[%=]]..
+
+[[%#Normal#]] .. [[<<<<]]
+
 end
 
 local function generate_StatusLineNC( winid )
@@ -38,7 +58,7 @@ local function generate_StatusLineNC( winid )
 
 [[%=]]..
 
-[[<]]
+[[%#Normal#]] .. [[<]]
 end
 
 
@@ -97,16 +117,8 @@ local function setup( I )
 
 -- Status line used for CURRENT window
 	generate_StatusLine()
+	generate_StatusLine2()
 	generate_StatusLineNC()
-	StatusLine2 =
-[[%{luaeval("require('stlfunctions').File()")}]].. 
-
-[[%=]]..
-
-
-[[%=]]..
-
-[[<<<<]]
 
 	StatusLine_augroup()
 
