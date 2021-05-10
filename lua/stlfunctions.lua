@@ -38,7 +38,7 @@ local function Rainbow_hl ( )
 	elseif slice == 3 then
 		r,g,b = 0,       255 - d, 255
 	elseif slice == 4 then
-		r,g,b = d,       0,     , 255
+		r,g,b = d,       0,       255
 	elseif slice == 5 then
 		r,g,b = 255,     0,       255 - d
 	end
