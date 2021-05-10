@@ -35,7 +35,7 @@ end
 
 local function generate_StatusLine2()
 	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('strlfuncitons').File()
+	filename = require('stlfuncitons').File()
 	StatusLine2 =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
