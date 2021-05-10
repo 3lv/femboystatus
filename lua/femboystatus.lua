@@ -12,8 +12,9 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 
 
 local function generate_StatusLine()
+	icon, icon_hl = require('stlfunction').Icon
 	StatusLine =
-'%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+'%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
 
