@@ -6,6 +6,7 @@ local fn = vim.fn
 local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWritePost',
                   'BufEnter','WinEnter','FileChangedShellPost','VimResized','TermOpen'}
 
+
 -- set's status line for current window and a 
 -- different status line for other windows
 -- (using vim.wo.statusline instead of .o.)
@@ -14,15 +15,16 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 local function generate_StatusLine()
 	icon, icon_hl = require('stlfunctions').Icon()
 	filename = require('stlfunctions').File()
+	mod, mod_hl = require('stlfunctions').File_Mod()
 	StatusLine =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileActive#]]..filename.. 
+[[ ]]..
+'%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
 [[%=]]..
-
 [[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..
-
 [[%=]]..
 
 [[%#Normal#]] .. [[fem@boy]]
@@ -40,6 +42,7 @@ local function generate_StatusLine2()
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileActive#]]..filename.. 
+'%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
 [[%=]]..
 
@@ -58,6 +61,7 @@ local function generate_StatusLineNC( winid )
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileNonActive#]]..filename.. 
+'%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
 [[%=]]..
 

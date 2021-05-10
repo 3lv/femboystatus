@@ -59,20 +59,24 @@ end
 
 local function get_current_file_name()
 	local file = vim.fn.expand('%:t')
-	if vim.fn.empty(file) == 1 then return  '[No Name][buffer ' .. vim.fn.bufnr('%') .. ']'end
-	if string.sub(file, 1, 4) == 'tmp.' then return '[Temp file]' end
-	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then return StatusLine_special_filetype[vim.bo.filetype] end
-	if vim.bo.filetype == 'help' then return file .. ' ' end
-	if vim.bo.modifiable and vim.bo.modified and vim.bo.readonly then
-		file = file .. ' ' .. ''
-	elseif vim.bo.modifiable and vim.bo.modified then
-		file = file .. ' ' .. ''
-	elseif vim.bo.readonly == true or vim.bo.modifiable == false then
-		file = file .. ' ' .. ''
-	else
-		file = file .. '  '
-	end
+	if vim.fn.empty(file) == 1 then file = '[No Name][buffer ' .. vim.fn.bufnr('%') .. ']' end
+	if string.sub(file, 1, 4) == 'tmp.' then file = '[Temp file]' end
+	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then file = StatusLine_special_filetype[vim.bo.filetype] end
 	return file
+end
+
+local function get_current_file_modifier ( )
+	local modicon = ' '
+	local modicon_hl = 'Normal'
+	if vim.bo.filetype == 'help' then modicon = '' end
+	if vim.bo.modifiable and vim.bo.modified and vim.bo.readonly then
+		modicon = ''
+	elseif vim.bo.modifiable and vim.bo.modified then
+		modicon = ''
+	elseif vim.bo.readonly == true or vim.bo.modifiable == false then
+		modicon = ''
+	end
+	return modicon, modicon_hl
 end
 
 local function Mode()
@@ -116,6 +120,7 @@ local function Mode()
 end
 
 
+M.File_Mod = get_current_file_modifier
 M.File = get_current_file_name
 M.Mode = Mode
 M.Icon = get_file_icon
