@@ -12,7 +12,7 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 
 
 local function generate_StatusLine()
-	icon, icon_hl = require('stlfunctions').Icon
+	icon, icon_hl = require('stlfunctions').Icon()
 	StatusLine =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
