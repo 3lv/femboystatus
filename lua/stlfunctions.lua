@@ -28,15 +28,17 @@ local function Rainbow_hl ( )
 	local d = Rainbowid % 256
 	local slice = Rainbowid / 256
 	slice = math.floor( slice )
-	local r, g, b
-	if slice == 1 then
+	local r, g, b = 0, 0, 0
+	if slice == 0 then
 		r,g,b = 255,     d,       0
-	elseif slice == 2 then
+	elseif slice == 1 then
 		r,g,b = 255 - d, 255,     0
-	elseif slice == 3 then
+	elseif slice == 2 then
 		r,g,b = 0,       255,     d
-	elseif slice == 4 then
+	elseif slice == 3 then
 		r,g,b = 0,       255 - d, 255
+	elseif slice == 4 then
+		r,g,b = d,       0,     , 255
 	elseif slice == 5 then
 		r,g,b = 255,     0,       255 - d
 	end
