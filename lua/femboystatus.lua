@@ -28,6 +28,8 @@ local function generate_StatusLine()
 [[%=]]..
 
 [[fem@boy]]
+
+..'%<'
 end
 
 -- Generates a statusline used for current
@@ -47,6 +49,7 @@ local function generate_StatusLine2()
 [[%=]]..
 
 [[%#Normal#]] .. [[<<<<]]
+..'%<'
 end
 
 -- generates a statusline for a non current window
@@ -65,6 +68,7 @@ local function generate_StatusLineNC( winid )
 [[%=]]..
 
 [[%#Normal#]] .. [[<]]
+..'%<'
 end
 
 
@@ -80,6 +84,7 @@ local function generate_StatusLineNC2( winid )
 [[%=]]..
 
 [[%#Normal#]] .. [[<]]
+..'%<'
 end
 
 
