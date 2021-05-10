@@ -53,8 +53,8 @@ end
 -- (Specifically for window with 'winid')
 local function generate_StatusLineNC( winid )
 	icon, icon_hl = require('stlfunctions').Icon()
-	StatusLineNC = 
 	filename = require('strlfuncitons').File()
+	StatusLineNC = 
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileNonActive#]]..filename.. 
