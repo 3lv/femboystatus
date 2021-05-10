@@ -116,18 +116,18 @@ end
 local function Mode()
 	  -- auto change color according the vim mode
 	  local alias = {
-		  n = ' ノーマル ', --normal
-		  i = 'インサート', --insert
-		  c = ' コマンド ', --command line
-		  v = 'ビジュアル', --visual
-		  V = 'ビジュアル', --visual line
-		  [''] = 'ビジュアル', --visual block
-		  R  = '  代わる  ', --replace
-		  Rv  = '  代わる  ', --replace visual
-		  s  = ' セレクト ', --select
-		  S  = ' セレクト ', --select line
-		  [''] = ' セレクト ', --select block
-		  t  = 'ターミナル', -- terminal
+		  n = '  ノーマル ', --normal
+		  i = ' インサート', --insert
+		  c = '  コマンド ', --command line
+		  v = ' ビジュアル', --visual
+		  V = ' ビジュアル', --visual line
+		  [''] = ' ビジュアル', --visual block
+		  R  = '   代わる  ', --replace
+		  Rv  = '   代わる  ', --replace visual
+		  s  = '  セレクト ', --select
+		  S  = '  セレクト ', --select line
+		  [''] = '  セレクト ', --select block
+		  t  = ' ターミナル', -- terminal
 		  ['r']  = 'HIT-ENTER', -- HIT-ENTER
 		  ['!']  = 'SHELL', -- shell
 		  ['r?'] = ':CONFIRM', -- :CONFIRM
