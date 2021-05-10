@@ -116,7 +116,7 @@ end
 local function Mode()
 	  -- auto change color according the vim mode
 	  local alias = {
-		  n = ' ノーマル ', --normal
+		  n = '\ ノーマル\ ', --normal
 		  i = 'インサート', --insert
 		  c = ' コマンド ', --command line
 		  v = 'ビジュアル', --visual
