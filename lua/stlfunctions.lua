@@ -24,6 +24,7 @@ local function Rainbow_hl ( )
 	Rainbowid = Rainbowid + 1
 	if Rainbowid >= 256 * 6 then
 		Rainbowid = 0
+	end
 	local d = Rainbowid % 256
 	local slice = Rainbowid / 256
 	slice = math.floor( slice )
