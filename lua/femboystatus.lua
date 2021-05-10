@@ -31,8 +31,8 @@ local function generate_StatusLine()
 end
 
 -- Generates a statusline used for current
--- window if window
--- has a buffer with special filetype
+-- window if window's buffer has a
+-- special filetype
 -- (usually less important)
 
 local function generate_StatusLine2()
@@ -42,14 +42,11 @@ local function generate_StatusLine2()
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileActive#]]..filename.. 
-'%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
 [[%=]]..
-
 [[%=]]..
 
 [[%#Normal#]] .. [[<<<<]]
-
 end
 
 -- generates a statusline for a non current window
@@ -61,11 +58,25 @@ local function generate_StatusLineNC( winid )
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileNonActive#]]..filename.. 
+[[ ]]..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
 [[%=]]..
+[[%=]]..
+
+[[%#Normal#]] .. [[<]]
+end
 
 
+local function generate_StatusLineNC2( winid )
+	icon, icon_hl = require('stlfunctions').Icon()
+	filename = require('stlfunctions').File()
+	StatusLineNC2 =
+'%#'..icon_hl..'#'..icon.. 
+[[ ]]..
+[[%#StatusLineFileNonActive#]]..filename.. 
+
+[[%=]]..
 [[%=]]..
 
 [[%#Normal#]] .. [[<]]
@@ -111,7 +122,6 @@ end
 
 local function set_active_startusline()
 	-- get current win/buf informations
-	nr_of_windows = fn.winnr('$')
 	current_winid = fn.win_getid()
 	current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
@@ -127,8 +137,15 @@ local function set_active_startusline()
 end
 
 local function set_inactive_statusline()
-	generate_StatusLineNC()
-	vim.wo.statusline = StatusLineNC
+	current_winid = fn.win_getid()
+	current_bufnr = fn.winbufnr(current_winid)
+	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
+		generate_StatusLineNC2()
+		vim.wo.statusline = StatusLineNC2
+	else
+		generate_StatusLineNC()
+		vim.wo.statusline = StatusLineNC
+	end
 end
 
 local function StatusLine_augroup()
