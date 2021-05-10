@@ -43,7 +43,7 @@ local function Rainbow_hl ( )
 		r,g,b = 255,     0,       255 - d
 	end
 	local hex = string.format("#%02X%02X%02X", r, g, b)
-	print( hex )
+	vim.cmd([[hi Rainbow guifg=]]..hex)
 
 end
 
