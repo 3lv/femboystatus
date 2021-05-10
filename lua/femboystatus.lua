@@ -13,7 +13,7 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 
 local function generate_StatusLine()
 	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('strlfuncitons').File()
+	filename = require('stlfuncitons').File()
 	StatusLine =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
@@ -53,7 +53,7 @@ end
 -- (Specifically for window with 'winid')
 local function generate_StatusLineNC( winid )
 	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('strlfuncitons').File()
+	filename = require('stlfuncitons').File()
 	StatusLineNC = 
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
