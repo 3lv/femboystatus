@@ -13,10 +13,11 @@ local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWrite
 
 local function generate_StatusLine()
 	icon, icon_hl = require('stlfunctions').Icon()
+	filename = require('strlfuncitons').File()
 	StatusLine =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
-[[%#StatusLineFileActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#StatusLineFileActive#]]..filename.. 
 
 [[%=]]..
 
@@ -33,11 +34,12 @@ end
 -- (usually less important)
 
 local function generate_StatusLine2()
-
+	icon, icon_hl = require('stlfunctions').Icon()
+	filename = require('strlfuncitons').File()
 	StatusLine2 =
-'%#'..require('stlfunctions').Icon_hl()..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+'%#'..icon_hl..'#'..icon.. 
 [[ ]]..
-[[%#StatusLineFileActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#StatusLineFileActive#]]..filename.. 
 
 [[%=]]..
 
@@ -50,10 +52,12 @@ end
 -- generates a statusline for a non current window
 -- (Specifically for window with 'winid')
 local function generate_StatusLineNC( winid )
+	icon, icon_hl = require('stlfunctions').Icon()
 	StatusLineNC = 
-'%#'..require('stlfunctions').NC_Icon_hl( winid )..'#'..[[%{luaeval("require('stlfunctions').Icon()")}]].. 
+	filename = require('strlfuncitons').File()
+'%#'..icon_hl..'#'..icon.. 
 [[ ]]..
-[[%#StatusLineFileNonActive#]]..[[%{luaeval("require('stlfunctions').File()")}]].. 
+[[%#StatusLineFileNonActive#]]..filename.. 
 
 [[%=]]..
 
