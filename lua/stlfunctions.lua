@@ -31,9 +31,13 @@ end
 -- used only for current window
 local function get_file_icon()
 	local icon, icon_hl
+	if vim.bo.filetype == 'help' then
+		icon = icon or ''
+		icon_hl = icon_hl or 'Normal'
+	end
 	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then
-		icon = ''
-		icon_hl = 'Normal'
+		icon = icon or ''
+		icon_hl = icon_hl or 'Normal'
 	end
 	local ok,devicons = pcall(require,'nvim-web-devicons')
 	if not ok then print([[Install 'kyazdani42/nvim-web-devicons' to use icons]]) return '' end
@@ -68,7 +72,6 @@ end
 local function get_current_file_modifier ( )
 	local modicon = ' '
 	local modicon_hl = 'Normal'
-	if vim.bo.filetype == 'help' then modicon = '' end
 	if vim.bo.modifiable and vim.bo.modified and vim.bo.readonly then
 		modicon = ''
 	elseif vim.bo.modifiable and vim.bo.modified then
