@@ -122,7 +122,7 @@ local function Mode()
 		  v = 'ビジュアル', --visual
 		  V = 'ビジュアル', --visual line
 		  [''] = 'ビジュアル', --visual block
-		  R  = '  代わる  ', --replace
+		  R  = '    代わる  ', --replace
 		  Rv  = '  代わる  ', --replace visual
 		  s  = ' セレクト ', --select
 		  S  = ' セレクト ', --select line
