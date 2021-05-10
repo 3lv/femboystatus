@@ -27,7 +27,7 @@ local function generate_StatusLine()
 [[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..
 [[%=]]..
 
-[[%#Rainbow#]] .. [[%{luaeval("require('stlfunctions').Rainbow()")}]]
+[[fem@boy]]
 end
 
 -- Generates a statusline used for current
