@@ -16,6 +16,34 @@ local colors = {
 	blue = '#51afef';
 	red = '#ec5f67'
 }
+
+local function Rainbow_hl ( )
+	if Rainbowid == nil then
+		Rainbowid = 0
+	end
+	Rainbowid = Rainbowid + 1
+	if Rainbowid >= 256 * 6 then
+		Rainbowid = 0
+	local d = Rainbowid % 256
+	local slice = Rainbowid / 256
+	slice = math.floor( slice )
+	local r, g, b
+	if slice == 1 then
+		r,g,b = 255,     d,       0
+	elseif slice == 2 then
+		r,g,b = 255 - d, 255,     0
+	elseif slice == 3 then
+		r,g,b = 0,       255,     d
+	elseif slice == 4 then
+		r,g,b = 0,       255 - d, 255
+	elseif slice == 5 then
+		r,g,b = 255,     0,       255 - d
+	end
+	local hex = string.format("#%02X%02X%02X", r, g, b)
+	print( hex )
+
+end
+
 local function get_file_icon_hl( winid )
 	local bufid = vim.fn.winbufnr(winid)
 	local bufcode = '#'..bufid
@@ -129,5 +157,6 @@ M.Mode = Mode
 M.Icon = get_file_icon
 M.Icon_hl = get_current_file_icon_hl
 M.NC_Icon_hl = get_file_icon_hl
+M.Rainbow = Rainbow_hl
 
 return M
