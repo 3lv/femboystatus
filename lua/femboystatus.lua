@@ -17,14 +17,14 @@ local function generate_StatusLine()
 	filename = require('stlfunctions').File()
 	mod, mod_hl = require('stlfunctions').File_Mod()
 	StatusLine =
-'%#'..icon_hl..'#'..' '..icon.. 
+'%#'..icon_hl..'#'..icon.. 
 [[ ]]..
 [[%#StatusLineFileActive#]]..filename.. 
 [[ ]]..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
 [[%=]]..
-[[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..
+[[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..[[%#Normal#]]..
 [[%=]]..
 
 [[fem@boy]]
