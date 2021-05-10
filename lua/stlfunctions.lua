@@ -44,7 +44,7 @@ local function Rainbow_hl ( )
 	end
 	local hex = string.format("#%02X%02X%02X", r, g, b)
 	vim.cmd([[hi Rainbow guifg=]]..hex)
-
+	return 'femboy'
 end
 
 local function get_file_icon_hl( winid )
