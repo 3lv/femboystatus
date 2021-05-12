@@ -3,9 +3,8 @@ M = { }
 
 local fn = vim.fn
 
-local events = { 'ColorScheme', 'FileType','BufWinEnter','BufReadPost','BufWritePost',
-                  'BufEnter','WinEnter','FileChangedShellPost','VimResized','TermOpen'}
-
+local events = { 'WinEnter', 'BufEnter', 'BufWinEnter', 'BufReadPost', 'BufWritePost',
+		 'VimResized', 'FileType', 'Colorscheme', 'FileChangedShellPost', 'TermOpen'}
 
 -- set's status line for current window and a 
 -- different status line for other windows
@@ -167,8 +166,8 @@ end
 
 local function setup( I )
 	StatusLine_special_filetype = { NvimTree = 'NvimTree פּ', packer = 'Packer ' }
-
-	StatusLine_augroup()
+	vim.api.nvim_command('hi StatusLineFileActive guifg=#b0da6c guibg=NONE gui=bold')
+	vim.api.nvim_command('hi StatusLineFileNoneActive guifg=#b0da6c guibg=NONE')
 
 end
 
