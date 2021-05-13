@@ -17,6 +17,32 @@ local colors = {
 	red = '#ec5f67'
 }
 
+
+local function get_nvim_lsp_diagnostic( diag_type )
+	if next(vim.lsp.buf_get_clients(0)) == nil then
+		return ''
+	end
+	local active_clients = vim.lsp.get_active_clients()
+	if active_clients then
+		local count = 0
+		for _, client in ipairs(active_clients) do
+			count = count + vim.lsp.diagnostic.get_count(0, diag_type, client.id)
+		end
+		if count ~= 0 then
+			return count
+		end
+	end
+	return ''
+
+end
+
+local function get_diagnostic_error()
+	if not vim.tbl_isempty(vim.lsp.buf_get_clients(0)) then
+		return ' '..get_nvim_lsp_diagnostic( 'Error' )
+	end
+	return ''
+end
+
 local function Rainbow_hl ( )
 	if Rainbowid == nil then
 		Rainbowid = 0
@@ -161,5 +187,6 @@ M.Icon = get_file_icon
 M.Icon_hl = get_current_file_icon_hl
 M.NC_Icon_hl = get_file_icon_hl
 M.Rainbow = Rainbow_hl
+M.Error = get_diagnostic_error
 
 return M
