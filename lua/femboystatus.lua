@@ -26,7 +26,7 @@ local function generate_StatusLine()
 [[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..[[%#Normal#]]..
 [[%=]]..
 
-[[%#LspDiagnosticDefaultError#]]..[[%-04%{luaeval('require('stlfunction')..Error()")}]]..
+[[%#LspDiagnosticDefaultError#]]..[[%-4{luaeval("require('stlfunctions').Error()")}]]..
 [[%#Normal#]]..[[fem@boy]]
 
 ..'%<'
