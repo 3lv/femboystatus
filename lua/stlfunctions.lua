@@ -46,35 +46,6 @@ local function get_diagnostic_error()
 	return ' '
 end
 
-local function Rainbow_hl ( )
-	if Rainbowid == nil then
-		Rainbowid = 0
-	end
-	Rainbowid = Rainbowid + 1
-	if Rainbowid >= 256 * 6 then
-		Rainbowid = 0
-	end
-	local d = Rainbowid % 256
-	local slice = Rainbowid / 256
-	slice = math.floor( slice )
-	local r, g, b = 0, 0, 0
-	if slice == 0 then
-		r,g,b = 255,     d,       0
-	elseif slice == 1 then
-		r,g,b = 255 - d, 255,     0
-	elseif slice == 2 then
-		r,g,b = 0,       255,     d
-	elseif slice == 3 then
-		r,g,b = 0,       255 - d, 255
-	elseif slice == 4 then
-		r,g,b = d,       0,       255
-	elseif slice == 5 then
-		r,g,b = 255,     0,       255 - d
-	end
-	local hex = string.format("#%02X%02X%02X", r, g, b)
-	vim.cmd([[hi Rainbow guifg=]]..hex)
-	return 'femboy'
-end
 
 local function get_file_icon_hl( winid )
 	local bufid = vim.fn.winbufnr(winid)
