@@ -43,7 +43,7 @@ local function get_diagnostic_error()
 			return ' '..get_nvim_lsp_diagnostic( 'Error' )
 		end
 	end
-	return ''
+	return ' '
 end
 
 local function Rainbow_hl ( )
