@@ -20,7 +20,7 @@ local colors = {
 
 local function get_nvim_lsp_diagnostic( diag_type )
 	if next(vim.lsp.buf_get_clients(0)) == nil then
-		return ''
+		return 0
 	end
 	local active_clients = vim.lsp.get_active_clients()
 	if active_clients then
@@ -32,13 +32,16 @@ local function get_nvim_lsp_diagnostic( diag_type )
 			return count
 		end
 	end
-	return ''
+	return 0
 
 end
 
 local function get_diagnostic_error()
 	if not vim.tbl_isempty(vim.lsp.buf_get_clients(0)) then
-		return ' '..get_nvim_lsp_diagnostic( 'Error' )
+		local error_nr = get_nvim_lsp_diagnostic( 'Error' )
+		if error_nr > 0 then
+			return ' '..get_nvim_lsp_diagnostic( 'Error' )
+		end
 	end
 	return ''
 end
