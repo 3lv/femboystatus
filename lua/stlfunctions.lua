@@ -17,6 +17,46 @@ local colors = {
 	red = '#ec5f67'
 }
 
+local numbers = { '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'}
+numbers[0] = '零'
+numbers[100] = '百'
+
+local function japanese_number( number )
+	local j_number
+	if number <= 9 then
+		j_number = '  ' .. numbers[0]
+	elseif number <= 99 then
+		local d1, d2 = number / 10, number % 10
+		local j_d1, j_d2 = '', ''
+		if d1 == 0 then
+			j_d1 = '  '
+		elseif d1 == 1 then
+			j_d1 = numbers[10]
+		else
+			j_d1 = numbers[d1]..numbers[10]
+		end
+		if d2 == 0 then
+			j_d2 = ''
+		else
+			j_d2 = numbers[d2]
+		end
+		j_number = j_d1..j_d2
+	end
+	return j_number
+end
+
+local function current_line_percent()
+	local current_line = vim.fn.line('.')
+	local total_line = vim.fn.line('$')
+	if current_line == 1 then
+		return '  上 '
+	elseif current_line == vim.fn.line('$') then
+		return '  下 '
+	end
+	local percentage,_ = math.modf((current_line/total_line)*100)
+	local j_percentage = japanese_number(percentage)
+	return j_percentage..' '..'厘'
+end
 
 local function get_nvim_lsp_diagnostic( diag_type )
 	if next(vim.lsp.buf_get_clients(0)) == nil then
@@ -49,12 +89,12 @@ end
 
 local function get_file_icon_hl( winid )
 	local bufid = vim.fn.winbufnr(winid)
-	local bufcode = '#'..bufid
-	local f_name = vim.fn.expand(bufcode..':t')
-	local f_extension = vim.fn.expand(bufcode..':e')
+	local bufname = vim.fn.bufname(bufid)
+	local f_name = vim.fn.fnamemodify(bufname, ':t')
+	local f_extension = vim.fn.fnamemodify(bufname, ':e')
 	local ok,devicons = pcall(require,'nvim-web-devicons')
 	local icon, icon_hl = devicons.get_icon(f_name,f_extension)
-	if icon_hl == nil then return 'Normal' end
+	icon_hl = icon_hl or 'Normal'
 	return icon_hl
 
 end
@@ -155,7 +195,7 @@ M.Mode = Mode
 M.Icon = get_file_icon
 M.Icon_hl = get_current_file_icon_hl
 M.NC_Icon_hl = get_file_icon_hl
-M.Rainbow = Rainbow_hl
 M.Error = get_diagnostic_error
+M.Line_P = current_line_percent
 
 return M

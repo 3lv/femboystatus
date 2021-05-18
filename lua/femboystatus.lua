@@ -6,19 +6,19 @@ local fn = vim.fn
 local events = { 'WinEnter', 'BufEnter', 'BufWinEnter', 'BufReadPost', 'BufWritePost',
 		 'VimResized', 'FileType', 'Colorscheme', 'FileChangedShellPost', 'TermOpen'}
 
--- set's status line for current window and a 
+-- set's status line for current window and a
 -- different status line for other windows
 -- (using vim.wo.statusline instead of .o.)
 
 
 local function generate_StatusLine()
-	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('stlfunctions').File()
-	mod, mod_hl = require('stlfunctions').File_Mod()
+	local icon, icon_hl = require('stlfunctions').Icon()
+	local filename = require('stlfunctions').File()
+	local mod, mod_hl = require('stlfunctions').File_Mod()
 	StatusLine =
-'%#'..icon_hl..'#'..icon.. 
+'%#'..icon_hl..'#'..icon..
 [[ ]]..
-[[%#StatusLineFileActive#]]..filename.. 
+[[%#StatusLineFileActive#]]..filename..
 [[ ]]..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
@@ -27,9 +27,9 @@ local function generate_StatusLine()
 [[%=]]..
 
 [[%#LspDiagnosticsDefaultError#]]..[[%-4{luaeval("require('stlfunctions').Error()")}]]..
-[[%#Rainbow#]]..[[fem@boy]]
+[[%#Rainbow#]]..[[%{luaeval("require('stlfunctions').Line_P()")}]]..
 
-..'%<'
+'%<'
 end
 
 -- Generates a statusline used for current
@@ -38,8 +38,8 @@ end
 -- (usually less important)
 
 local function generate_StatusLine2()
-	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('stlfunctions').File()
+	local icon, icon_hl = require('stlfunctions').Icon()
+	local filename = require('stlfunctions').File()
 	StatusLine2 =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
@@ -55,12 +55,12 @@ end
 -- generates a statusline for a non current window
 -- (Specifically for window with 'winid')
 local function generate_StatusLineNC( winid )
-	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('stlfunctions').File()
-	StatusLineNC = 
-'%#'..icon_hl..'#'..icon.. 
+	local icon, icon_hl = require('stlfunctions').Icon()
+	local filename = require('stlfunctions').File()
+	StatusLineNC =
+'%#'..icon_hl..'#'..icon..
 [[ ]]..
-[[%#StatusLineFileNonActive#]]..filename.. 
+[[%#StatusLineFileNonActive#]]..filename..
 [[ ]]..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
@@ -73,12 +73,12 @@ end
 
 
 local function generate_StatusLineNC2( winid )
-	icon, icon_hl = require('stlfunctions').Icon()
-	filename = require('stlfunctions').File()
+	local icon, icon_hl = require('stlfunctions').Icon()
+	local filename = require('stlfunctions').File()
 	StatusLineNC2 =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
-[[%#StatusLineFileNonActive#]]..filename.. 
+[[%#StatusLineFileNonActive#]]..filename..
 
 [[%=]]..
 [[%=]]..
@@ -91,15 +91,15 @@ end
 
 local function set_every_statusline()
 
-	nr_of_windows = fn.winnr('$')
-	current_winid = fn.win_getid()
+	local nr_of_windows = fn.winnr('$')
+	local current_winid = fn.win_getid()
 	-- find buffer for current window
 
 	-- Setting statusline for non-current windows
 	-- (all windows but the curernt one)
 	for winnr = 1, nr_of_windows do -- for each window
 		-- get the id of window i
-		winid = fn.win_getid(winnr)
+		local winid = fn.win_getid(winnr)
 		if winid ~= current_winid then -- don't set for current window
 			-- TODO: check for special windows
 			generate_StatusLineNC( winid )
@@ -107,7 +107,7 @@ local function set_every_statusline()
 		end
 	end
 
-	current_bufnr = fn.winbufnr(current_winid)
+	local current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
 		-- Use the status line for special filetypes(a simple statusline)
@@ -127,8 +127,8 @@ end
 
 local function set_active_startusline()
 	-- get current win/buf informations
-	current_winid = fn.win_getid()
-	current_bufnr = fn.winbufnr(current_winid)
+	local current_winid = fn.win_getid()
+	local current_bufnr = fn.winbufnr(current_winid)
 	-- Check for special filetypes
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
 		-- Use the status line for special filetypes(a simpler statusline)
