@@ -26,7 +26,7 @@ local function japanese_number( number )
 	if number <= 9 then
 		j_number = '  ' .. numbers[0]
 	elseif number <= 99 then
-		local d1, d2 = number / 10, number % 10
+		local d1, d2 = math.floor(number / 10), number % 10
 		local j_d1, j_d2 = '', ''
 		if d1 == 0 then
 			j_d1 = '  '
