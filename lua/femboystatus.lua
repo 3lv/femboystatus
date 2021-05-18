@@ -27,7 +27,7 @@ local function generate_StatusLine()
 [[%=]]..
 
 [[%#LspDiagnosticsDefaultError#]]..[[%-4{luaeval("require('stlfunctions').Error()")}]]..
-[[%#MoreMsg#]]..[[%10{luaeval("require('stlfunctions').Line_P()")}]]..
+[[%#Rainbow#]]..[[%10{luaeval("require('stlfunctions').Line_P()")}]]..
 
 '%<'
 end

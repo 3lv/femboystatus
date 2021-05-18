@@ -24,12 +24,12 @@ numbers[100] = '百'
 local function japanese_number( number )
 	local j_number
 	if number <= 9 then
-		j_number = '  ' .. numbers[number]
+		j_number = numbers[number]
 	elseif number <= 99 then
 		local d1, d2 = math.floor(number / 10), number % 10
 		local j_d1, j_d2 = '', ''
 		if d1 == 0 then
-			j_d1 = '  '
+			j_d1 = ''
 		elseif d1 == 1 then
 			j_d1 = numbers[10]
 		else
