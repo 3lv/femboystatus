@@ -134,9 +134,10 @@ end
 
 local function get_current_file_name()
 	local file = vim.fn.expand('%:t')
-	if vim.fn.empty(file) == 1 then file = '[No Name][buffer ' .. vim.fn.bufnr('%') .. ']' end
+	if vim.fn.empty(file) == 1 then file = '[No Name]' end
 	if string.sub(file, 1, 4) == 'tmp.' then file = '[Temp file]' end
 	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then file = StatusLine_special_filetype[vim.bo.filetype] end
+	file = file .. ' [b' .. vim.fn.bufnr('%') .. ']'
 	return file
 end
 
