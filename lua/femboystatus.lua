@@ -18,7 +18,7 @@ local function generate_StatusLine()
 	StatusLine =
 '%#'..icon_hl..'#'..icon..
 [[ ]]..
-[[%#StatusLineFileActive#]]..filename..
+[[%#StatusLineFileActive#]]..filename..[[%{winnr()}]]..
 [[ ]]..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
@@ -43,7 +43,7 @@ local function generate_StatusLine2()
 	StatusLine2 =
 '%#'..icon_hl..'#'..icon..
 [[ ]]..
-[[%#StatusLineFileActive#]]..filename..
+[[%#StatusLineFileActive#]]..filename..[[%{winnr()}]]..
 
 [[%=]]..
 [[%=]]..
@@ -60,7 +60,7 @@ local function generate_StatusLineNC( winid )
 	StatusLineNC =
 '%#'..icon_hl..'#'..icon..
 [[ ]]..
-[[%#StatusLineFileNonActive#]]..filename..
+[[%#StatusLineFileNonActive#]]..filename..[[%{winnr()}]]..
 [[ ]]..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
@@ -78,7 +78,7 @@ local function generate_StatusLineNC2( winid )
 	StatusLineNC2 =
 '%#'..icon_hl..'#'..icon.. 
 [[ ]]..
-[[%#StatusLineFileNonActive#]]..filename..
+[[%#StatusLineFileNonActive#]]..filename..[[%{winnr()}]]..
 
 [[%=]]..
 [[%=]]..
@@ -142,8 +142,8 @@ local function set_active_startusline()
 end
 
 local function set_inactive_statusline()
-	current_winid = fn.win_getid()
-	current_bufnr = fn.winbufnr(current_winid)
+	local current_winid = fn.win_getid()
+	local current_bufnr = fn.winbufnr(current_winid)
 	if StatusLine_special_filetype[vim.bo[current_bufnr].filetype] ~= nil then
 		generate_StatusLineNC2()
 		vim.wo.statusline = StatusLineNC2
