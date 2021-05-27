@@ -137,7 +137,6 @@ local function get_current_file_name()
 	if vim.fn.empty(file) == 1 then file = '[No Name]' end
 	if string.sub(file, 1, 4) == 'tmp.' then file = '[Temp file]' end
 	if StatusLine_special_filetype[vim.bo.filetype] ~= nil then file = StatusLine_special_filetype[vim.bo.filetype] end
-	file = file .. ' [b' .. vim.fn.bufnr('%') .. ']'
 	return file
 end
 
@@ -155,38 +154,38 @@ local function get_current_file_modifier ( )
 end
 
 local function Mode()
-	  -- auto change color according the vim mode
-	  local alias = {
-		  n = '  ノーマル ', --normal
-		  i = ' インサート', --insert
-		  c = '  コマンド ', --command line
-		  v = ' ビジュアル', --visual
-		  V = ' ビジュアル', --visual line
-		  [''] = ' ビジュアル', --visual block
-		  R  = '   代わる  ', --replace
-		  Rv  = '   代わる  ', --replace visual
-		  s  = '  セレクト ', --select
-		  S  = '  セレクト ', --select line
-		  [''] = '  セレクト ', --select block
-		  t  = ' ターミナル', -- terminal
-		  ['r']  = 'HIT-ENTER', -- HIT-ENTER
-		  ['!']  = 'SHELL', -- shell
-		  ['r?'] = ':CONFIRM', -- :CONFIRM
-		  rm = '--MORE', -- --MORE
-	  }
-	  local mode_color = {
-		  n = colors.green,
-		  i = colors.blue,
-		  v = colors.magenta,[''] = colors.magenta,V = colors.magenta,
-		  R  = colors.yellow,
-		  s = colors.orange,S=colors.orange, [''] = colors.orange,
-		  t = colors.red,
-		  c  = colors.purple,
-	  }
-	  local vim_mode = vim.fn.mode()
-	  vim.api.nvim_command('hi StatusLineMode guifg='..mode_color[vim_mode]..' gui=bold')
-	  --return alias[vim_mode] .. '   '
-	  return alias[vim_mode]
+	-- auto change color according the vim mode
+	local alias = {
+		n = '  ノーマル ', --normal
+		i = ' インサート', --insert
+		c = '  コマンド ', --command line
+		v = ' ビジュアル', --visual
+		V = ' ビジュアル', --visual line
+		[''] = ' ビジュアル', --visual block
+		R  = '   代わる  ', --replace
+		Rv  = '   代わる  ', --replace visual
+		s  = '  セレクト ', --select
+		S  = '  セレクト ', --select line
+		[''] = '  セレクト ', --select block
+		t  = ' ターミナル', -- terminal
+		['r']  = 'HIT-ENTER', -- HIT-ENTER
+		['!']  = 'SHELL', -- shell
+		['r?'] = ':CONFIRM', -- :CONFIRM
+		rm = '--MORE', -- --MORE
+	}
+	local mode_color = {
+		n = colors.green,
+		i = colors.blue,
+		v = colors.magenta,[''] = colors.magenta,V = colors.magenta,
+		R  = colors.yellow,
+		s = colors.orange,S=colors.orange, [''] = colors.orange,
+		t = colors.red,
+		c  = colors.purple,
+	}
+	local vim_mode = vim.fn.mode()
+	vim.api.nvim_command('hi StatusLineMode guifg='..mode_color[vim_mode]..' gui=bold')
+	--return alias[vim_mode]..'   '
+	return alias[vim_mode]
 end
 
 

@@ -17,17 +17,19 @@ local function generate_StatusLine()
 	local mod, mod_hl = require('stlfunctions').File_Mod()
 	StatusLine =
 '%#'..icon_hl..'#'..icon..
-[[ ]]..
-[[%#StatusLineFileActive#]]..filename..[[%{winnr()}]]..
-[[ ]]..
+' '..
+'%#StatusLineFileActive#'..filename..
+' '..
+'[w%{winnr()}:b%{bufnr()}]'..
+' '..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
-[[%=]]..
-[[%#StatusLineMode#]]..[[%{luaeval("require('stlfunctions').Mode()")}]]..[[%#Normal#]]..
-[[%=]]..
+'%='..
+'%#StatusLineMode#'..[[%{luaeval("require('stlfunctions').Mode()")}]]..'%#Normal#'..
+'%='..
 
-[[%#LspDiagnosticsDefaultError#]]..[[%-4{luaeval("require('stlfunctions').Error()")}]]..
-[[%#Rainbow#]]..[[%10{luaeval("require('stlfunctions').Line_P()")}]]..
+'%#LspDiagnosticsDefaultError#'..[[%-4{luaeval("require('stlfunctions').Error()")}]]..
+'%#Rainbow#'..[[%10{luaeval("require('stlfunctions').Line_P()")}]]..
 
 '%<'
 end
@@ -42,13 +44,15 @@ local function generate_StatusLine2()
 	local filename = require('stlfunctions').File()
 	StatusLine2 =
 '%#'..icon_hl..'#'..icon..
-[[ ]]..
-[[%#StatusLineFileActive#]]..filename..[[%{winnr()}]]..
+' '..
+'%#StatusLineFileActive#'..filename..
+' '..
+'[w%{winnr()}:b%{bufnr()}]'..
 
-[[%=]]..
-[[%=]]..
+'%='..
+'%='..
 
-[[%#Normal#]] .. [[<<<<]]
+'%#Normal#' .. '<<<<'
 ..'%<'
 end
 
@@ -59,15 +63,17 @@ local function generate_StatusLineNC( winid )
 	local filename = require('stlfunctions').File()
 	StatusLineNC =
 '%#'..icon_hl..'#'..icon..
-[[ ]]..
-[[%#StatusLineFileNonActive#]]..filename..[[%{winnr()}]]..
-[[ ]]..
+' '..
+'%#StatusLineFileNonActive#'..filename..
+' '..
+'[w%{winnr()}:b%{bufnr()}]'..
+' '..
 '%#'..'Normal'..'#'..[[%{luaeval("require('stlfunctions').File_Mod()")}]]..
 
-[[%=]]..
-[[%=]]..
+'%='..
+'%='..
 
-[[%#Normal#]] .. [[<]]
+'%#Normal#' .. '<'
 ..'%<'
 end
 
@@ -77,13 +83,15 @@ local function generate_StatusLineNC2( winid )
 	local filename = require('stlfunctions').File()
 	StatusLineNC2 =
 '%#'..icon_hl..'#'..icon.. 
-[[ ]]..
-[[%#StatusLineFileNonActive#]]..filename..[[%{winnr()}]]..
+' '..
+'%#StatusLineFileNonActive#'..filename..
+' '..
+'[w%{winnr()}:b%{bufnr()}]'..
 
-[[%=]]..
-[[%=]]..
+'%='..
+'%='..
 
-[[%#Normal#]] .. [[<]]
+'%#Normal#' .. '<'
 ..'%<'
 end
 
