@@ -59,15 +59,11 @@ local function current_line_percent()
 end
 
 local function get_nvim_lsp_diagnostic( diag_type )
-	if next(vim.lsp.buf_get_clients(0)) == nil then
-		return 0
-	end
 	local active_clients = vim.lsp.get_active_clients()
 	if active_clients then
 		local count = 0
-		for _, client in ipairs(active_clients) do
-			count = count + vim.lsp.diagnostic.get_count(0, diag_type, client.id)
-		end
+		local diagnostics = vim.diagnostic.get(0, {severity = diag_type} )
+		for _ in pairs(diagnostics) do count = count + 1 end
 		if count ~= 0 then
 			return count
 		end
@@ -78,9 +74,9 @@ end
 
 local function get_diagnostic_error()
 	if not vim.tbl_isempty(vim.lsp.buf_get_clients(0)) then
-		local error_nr = get_nvim_lsp_diagnostic( 'Error' )
+		local error_nr = get_nvim_lsp_diagnostic( vim.diagnostic.severity.ERROR )
 		if error_nr > 0 then
-			return ' '..get_nvim_lsp_diagnostic( 'Error' )
+			return ' '..get_nvim_lsp_diagnostic( vim.diagnostic.severity.ERROR )
 		end
 	end
 	return ' '
