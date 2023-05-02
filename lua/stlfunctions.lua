@@ -110,7 +110,7 @@ local function get_file_icon()
 	if not ok then print([[Install 'kyazdani42/nvim-web-devicons' to use icons]]) return '' end
 	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
 	local devicon, devicon_hl = devicons.get_icon(f_name,f_extension)
-	icon = icon or devicon or ''
+	icon = icon or devicon or ''
 	icon_hl = icon_hl or devicon_hl or 'Normal'
 	return icon, icon_hl
 end
@@ -122,6 +122,7 @@ local function get_current_file_icon_hl()
 	end
 	local f_name,f_extension = vim.fn.expand('%:t'), vim.fn.expand('%:e')
 	local ok,devicons = pcall(require,'nvim-web-devicons')
+	if not ok then print([[Install 'kyazdani42/nvim-web-devicons' to use icons]]) return '' end
 	local icon, icon_hl = devicons.get_icon(f_name,f_extension)
 	if icon_hl == nil then return 'Normal' end
 	return icon_hl
@@ -180,7 +181,6 @@ local function Mode()
 	}
 	local vim_mode = vim.fn.mode()
 	vim.api.nvim_command('hi StatusLineMode guifg='..mode_color[vim_mode]..' gui=bold')
-	--return alias[vim_mode]..'   '
 	return alias[vim_mode]
 end
 
